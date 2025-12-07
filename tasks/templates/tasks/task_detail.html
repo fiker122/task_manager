@@ -1,0 +1,12 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+  <h2>{{ task.title }}</h2>
+  <p>{{ task.description }}</p>
+  <p>Completed: {{ task.completed }}</p>
+  <p>Tags:
+    {% for t in task.tags.all %}
+      <a href="{% url 'tasks_by_tag' t.name %}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
+    {% empty %}No tags{% endfor %}
+  </p>
+  <p><a href="{% url 'task_update' task.pk %}">Edit</a></p>
+{% endblock %}
