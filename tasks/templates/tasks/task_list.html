@@ -1,0 +1,22 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+  <h2>Tasks{% if tag %} — Tag: {{ tag.name }}{% endif %}</h2>
+  {% if tasks %}
+    <ul>
+    {% for task in tasks %}
+      <li>
+        <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+        {% if task.completed %}(Done){% endif %}
+        <div>
+          Tags:
+          {% for t in task.tags.all %}
+            <a href="{% url 'tasks_by_tag' t.name %}">{{ t.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% empty %}No tags{% endfor %}
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tasks found.</p>
+  {% endif %}
+{% endblock %}
