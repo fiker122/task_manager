@@ -1,0 +1,5 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+  <h2>Search results for "{{ query }}"</h2>
+  {% include 'tasks/task_list.html' %}
+{% endblock %}
